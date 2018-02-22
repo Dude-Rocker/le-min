@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/28 18:15:55 by vgladush          #+#    #+#             */
-/*   Updated: 2018/01/17 17:56:06 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/01/17 13:45:57 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdarg.h>
 # include "ft_printf.h"
 
 void				*ft_memset(void *b, int c, size_t len);

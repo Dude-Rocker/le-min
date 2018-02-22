@@ -6,13 +6,13 @@
 #    By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 21:48:14 by vgladush          #+#    #+#              #
-#    Updated: 2018/02/18 23:49:46 by vgladush         ###   ########.fr        #
+#    Updated: 2018/02/22 17:46:40 by vgladush         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= lem-in
 
-GC_FLGS = gcc -Wall -Wextra -Werror
+GC_FLGS = gcc -Wall -Wextra 
 
 SRC_DIR = ./
 INC_DIR = ./Includes/ $(LB_PATH)/Includes/
@@ -25,12 +25,12 @@ INC		= $(addprefix -I, $(INC_DIR))
 
 OBJS	= $(SRCS:.c=.o)
 
-SRCS	= le-min.c ft_error.c ft_logic.c
+SRCS	= le_min.c ft_error.c ft_logic.c ft_resout.c ft_algoexit.c
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@make -C $(LB_PATH)
+	# @make -C $(LB_PATH)
 	@gcc -o $(NAME) $(OBJ) $(LB_LINK)
 	@echo $(NAME) "ready"
 
@@ -43,7 +43,7 @@ clean:
 	@rm -rf $(OBJ_DIR)
 
 fclean:
-	@make -C $(LB_PATH) fclean
+	# @make -C $(LB_PATH) fclean
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(NAME)
 	@echo $(NAME) "deleted"

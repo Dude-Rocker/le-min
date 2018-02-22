@@ -41,8 +41,15 @@ void			strendf(char s, int *i)
 	}
 }
 
-static	void	prstsec(va_list *ar, int *i, char *un)
+static	int		prstsec(va_list *ar, int *i, char *un, int f)
 {
+	va_list		rrr;
+
+	va_copy(rrr, *ar);
+	if (f && !va_arg(rrr, void *))
+		return (1);
+	else if (f)
+		return (0);
 	if (!(un = va_arg(*ar, char *)))
 	{
 		if (i[11] < 0)
@@ -56,6 +63,7 @@ static	void	prstsec(va_list *ar, int *i, char *un)
 	}
 	else
 		ft_qstr(un, i);
+	return (0);
 }
 
 static	void	prfstr(char s, va_list *ar, int *i, char *un)
@@ -79,22 +87,21 @@ static	void	prfstr(char s, va_list *ar, int *i, char *un)
 		free(un);
 	}
 	else
-		prstsec(ar, i, un);
+		prstsec(ar, i, un, 0);
 }
 
 static	void	opersec(char *s, va_list *ar, int *i, char *st)
 {
-	if (s[*i] == 'Z')
+	if (OPER(s[*i]) && OPE2(s[*i]) && OPE3(s[*i]))
+		strendf(s[*i], i);
+	else if (s[*i] == 'Z')
 		ft_qstr(ft_rotnb(va_arg(*ar, char *), 42), i);
 	else if (s[*i] == 'Y')
 		ft_qstr(ft_rotnb(va_arg(*ar, char *), -42), i);
+	else if ((s[*i] == 'a' || s[*i] == 'A') && i[5])
+		ft_dblhex(va_arg(*ar, long double), i, s[*i]);
 	else if (s[*i] == 'a' || s[*i] == 'A')
-	{
-		if (i[5])
-			ft_dblhex(va_arg(*ar, long double), i, s[*i]);
-		else
-			ft_dblhex(va_arg(*ar, double), i, s[*i]);
-	}
+		ft_dblhex(va_arg(*ar, double), i, s[*i]);
 	else if (DEVAL(s[*i]) || DEVA2(s[*i]))
 		ft_prfnbr(s[*i], i, ar, st);
 	else if (s[*i] == 'p' && (st = ft_itoabase(va_arg(*ar, uintmax_t), 16, 97)))
@@ -119,6 +126,8 @@ void			ft_prfoper(char *s, va_list *ar, int *i)
 	st = NULL;
 	if (s[*i] == 'n')
 	{
+		if (prstsec(0, 0, 0, 1))
+			return ;
 		if (i[8] != 2 && i[8] != 1)
 			*va_arg(*ar, unsigned int *) = i[1];
 		else if (i[8] == 2)
@@ -134,8 +143,6 @@ void			ft_prfoper(char *s, va_list *ar, int *i)
 		else
 			prfstr(s[*i], ar, i, st);
 	}
-	else if (OPER(s[*i]) && OPE2(s[*i]) && OPE3(s[*i]))
-		strendf(s[*i], i);
 	else
 		opersec(s, ar, i, st);
 }

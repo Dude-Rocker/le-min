@@ -6,13 +6,17 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/28 18:15:55 by vgladush          #+#    #+#             */
-/*   Updated: 2018/01/17 17:56:09 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/01/17 13:45:48 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h>
 # include <stdarg.h>
 # include <wchar.h>
 # include <wctype.h>

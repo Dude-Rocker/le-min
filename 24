@@ -1,0 +1,35 @@
+24
+first 9 12
+second 7 5
+##start
+zero 6 4
+##end
+last 0 5
+##comment
+third 8 3
+more 56 91
+and 9 87
+ok 87 12
+#coim
+#bit
+#start
+o 12 51
+#end
+dct 124 51
+lk 09 182
+second-zero
+second-last
+third-first
+zero-last
+third-last
+
+5
+3 776 12
+##start
+1 2 3
+##end
+2 3 4
+4 9 8
+1-2
+1-3
+1-4
