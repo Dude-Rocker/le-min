@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:33:23 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/22 19:56:01 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/23 17:39:54 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,20 @@ static	void	srcexit(t_lm *lm, int a, int j, int i)
 	while (lm->place != 3)
 	{
 		while (lm->link[++i])
-			if (!m || m > lm->link[i]->ex)
+		{
+			if (lm->link[i]->place == 3 || (lm->link[i]->place != 1 &&
+				!lm->link[i]->way[1] &&	lm->link[i]->ex &&
+				(!m || (lm->link[i]->ex < m))))
 			{
 				m = lm->link[i]->ex;
 				p = i;
 			}
+		}
 		lm->way[0] = j++;
 		lm->way[1] = a;
 		lm = lm->link[p];
 		m = 0;
+		i = -1;
 	}
 }
 
@@ -42,11 +47,13 @@ static	void	rightway(t_lm *lm, int i, int j, t_lm *bg)
 	{
 		lm = bg->link[i];
 		l = lm->way[1];
-		lm->way[1] *= -1;
-		// while (lm->place != 3)
-		// {
-		// 	while (lm->link[++j] != )
-		// }
+		while (lm && lm->place != 3 &&  !(j = 0))
+		{
+			lm->way[1] *= -1;
+			while (lm->link[j] && lm->link[j]->way[1] != l && lm->link[j]->ex)
+				j++;
+			lm = lm->link[j];
+		}
 	}
 }
 
@@ -57,8 +64,12 @@ void			ft_algoexit(t_lm *lm, int a, t_lm *bg, int p)
 
 	j[0] = 1;
 	j[1] = 0;
-	i = -1;
-	srcexit(bg, 1, 1, -1);
-	rightway(bg, -1, -1, bg);
+	i = 0;
+	while (bg->link[i])
+		if (bg->link[i]->ex)
+			i++;
+	while (i--)
+		srcexit(bg, 1, 1, -1);
+	// rightway(bg, -1, -1, bg);
 	ft_theway(lm, a, 0, j);
 }

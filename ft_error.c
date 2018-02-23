@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 20:47:13 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/22 22:06:58 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:46:15 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
 	ant = 0;
 	while (bg->link[i])
 	{
-		if (!strcmp(bg->link[i]->nm, end->nm))
+		if (!ft_strcmp(bg->link[i]->nm, end->nm))
 		{
 			while (ant++ < j)
 			{

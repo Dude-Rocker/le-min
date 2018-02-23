@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 15:21:05 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/22 21:27:21 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:30:06 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,12 @@ int				main(void)
 	int			i;
 
 	i = 2;
-	ln = 0;
 	lm = 0;
 	if (get_next_line(0, &ln) < 0)
 		exit(ft_printf("ERROR\n"));
 	ants = ft_atoi(ln);
 	outerror(ln, ants, 0);
-	while (get_next_line(0, &ln) > 0)
+	while (!(ln = 0) && get_next_line(0, &ln) > 0)
 	{
 		if (!*ln || !checkval(&ln, 0, &i) || (!i && !writelink(lm, ln, 0)))
 			break ;
@@ -136,114 +135,9 @@ int				main(void)
 			writevalue(&lm, 0, ln, i);
 		free(ln);
 	}
-	free(ln);
+	if (ln)
+		free(ln);
 	ft_logic(ants, lm);
 	ft_printf("good\n");
 	return (0);
 }
-
-// int		main()
-// {
-// 	char *l;
-// 	char *s;
-// 	char **j;
-// 	int	i = 0;
-
-// 	l = ft_strdup("au");
-// 	s = ft_strdup("uuu");
-// 	j = (char **)malloc(sizeof(char *));
-// 	j[0] = l;
-// 	j[1] = s;
-// 	j[2] = 0;
-// 	while (j[i])
-// 		ft_printf("%s\n", j[i++]);
-// }
-
-// int				main(void)
-// {
-	// t_lm     *lm;
-	// t_lm     *lm1;
-	// t_lm     *lm2;
-	// t_lm     *lm3;
-	// int i = 7;
-
-	// lm = (t_lm *)malloc(sizeof(t_lm));
-	// lm->link = 0;
-	// lm3 = lm;
-	// while (i--)
-	// {
-	// 	lm->next = (t_lm *)malloc(sizeof(t_lm));
-	// 	lm = lm->next;
-	// 	lm->link = 0;
-	// }
-	// lm->next = 0;
-	// lm = lm3;
-	// while (lm)
-	// {
-	// 	ft_printf("lm %d\n", ++i);
-	// 	lm = lm->next;
-	// }
-	// lm = lm3;
-	// lm3 = lm3->next;
-	// lm3 = lm3->next;
-	// lm1 = lm3;
-	// lm3 = lm3->next;
-	// lm3 = lm3->next;
-	// lm2 = lm3;
-	// i = 0;
-	// i = 0;
-	// lm3 = lm1;
-	// while (lm1)
-	// {
-	// 	ft_printf("lm1 %d\n", ++i);
-	// 	lm1 = lm1->next;
-
-	// }
-	// i = 0;
-	// lm1 = lm3;
-	// lm3 = lm2;
-	// while (lm2)
-	// {
-	// 	ft_printf("lm2 %d\n", ++i);
-	// 	lm2 = lm2->next;
-	// }
-	// lm2 = lm3;
-	// if (!lm1->link)
-	// {
-	// 	if (!(lm1->link = (t_lm **)malloc(sizeof(t_lm *))))
-	// 		return (0);
-	// 	lm1->link[0] = 0;
-	// }
-	// if (!lm2->link)
-	// {
-	// 	if (!(lm2->link = (t_lm **)malloc(sizeof(t_lm *))))
-	// 		return (0);
-	// 	lm2->link[0] = 0;
-	// }
-	// lm1->link[0] = lm2;
-	// lm2->link[0] = lm1;
-	// if (!lm1->link)
-	// {
-	// 	if (!(lm1->link = (t_lm **)malloc(sizeof(t_lm *))))
-	// 		return (0);
-	// 	lm1->link[0] = 0;
-	// }
-	// lm1->link[1] = lm;
-	// lm1->link[2] = 0;
-	// lm2->link[1] = 0;
-	// i = 0;
-	// lm3 = lm1->link[i];
-	// while (lm1->link[i])
-	// {
-	// 	lm1->link[0] = lm1->link[0]->next;
-	// 	ft_printf("lm2 s lm1 %d\n", ++i);
-	// }
-	// i = 0;
-	// lm3 = lm1->link[1];
-	// while (lm3)
-	// {
-	// 	lm3 = lm3->next;
-	// 	ft_printf("lm s lm1 %d\n", ++i);
-	// }
-// 	return (0);
-// }
