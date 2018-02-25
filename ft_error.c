@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 20:47:13 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/23 14:46:15 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/23 22:06:58 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,4 @@ void	ft_allfree(t_lm *lm, char *d, char *s, int o)
 		free(lm->next);
 	if (o)
 		exit(ft_printf("ERROR\n"));
-}
-
-void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
-{
-	int	i;
-	int	ant;
-
-	i = 0;
-	ant = 0;
-	while (bg->link[i])
-	{
-		if (!ft_strcmp(bg->link[i]->nm, end->nm))
-		{
-			while (ant++ < j)
-			{
-				ft_printf("L%d-%s", ant, end->nm);
-				if (ant < j)
-					ft_printf(" ");
-			}
-			ft_printf("\n");
-			ft_allfree(cl, 0, 0, 0);
-			exit(1);
-		}
-		i++;
-	}
 }

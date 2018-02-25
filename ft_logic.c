@@ -6,11 +6,36 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 23:28:17 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/23 14:55:43 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/25 13:23:56 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "le_min.h"
+
+static	void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
+{
+	int			i;
+	int			ant;
+
+	i = 0;
+	ant = 0;
+	while (bg->link[i])
+	{
+		if (!ft_strcmp(bg->link[i]->nm, end->nm))
+		{
+			while (ant++ < j)
+			{
+				ft_printf("L%d-%s", ant, end->nm);
+				if (ant < j)
+					ft_printf(" ");
+			}
+			ft_printf("\n");
+			ft_allfree(cl, 0, 0, 0);
+			exit(1);
+		}
+		i++;
+	}
+}
 
 void			ft_creat(t_lm *lm, int i, int j, int k)
 {
@@ -102,10 +127,12 @@ void			ft_logic(int i, t_lm *lm)
 	if (!end || !end->link)
 		ft_allfree(lm, 0, 0, 1);
 	ft_creat(end, 0, 0, 0);
+	end->ex = 0;
 	while (bg && bg->place != 1)
 		bg = bg->next;
 	if (!bg || !bg->ex)
 		ft_allfree(lm, 0, 0, 1);
+	bg->ex = 0;
 	startend(lm, bg, end, i);
-	ft_algoexit(end, i, bg, 0);
+	ft_algoexit(end, i, bg);
 }

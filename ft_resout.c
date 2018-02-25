@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:52:56 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/23 11:23:59 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/25 17:22:56 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 static	int		ft_printres(t_lm *lm, int j, int i, int cn)
 {
-	while (lm->place != 1 && cn != lm->ant[1])
+	while (!(i = 0) && lm->place != 1 && cn != lm->ant[1])
 	{
-		while (lm->link[i]->way[1] != j || lm->ex > lm->link[i]->ex)
+		while (lm->link[i]->place != 1 && (lm->link[i]->way[1] != j ||
+			lm->ex > lm->link[i]->ex))
 			i++;
 		lm = lm->link[i];
-		i = 0;
 	}
-	while (lm->link[i]->way[1] != j || lm->ex < lm->link[i]->ex)
+	while (lm->link[i]->place != 3 && (lm->link[i]->way[1] != j ||
+		(lm->place != 1 && lm->ex < lm->link[i]->ex)))
 		i++;
 	if (lm->place == 1 && lm->link[i]->ant[0] == cn)
 	{
@@ -40,18 +41,18 @@ static	int		ft_printres(t_lm *lm, int j, int i, int cn)
 	return (0);
 }
 
-static	void	ft_resout(t_lm *lm, int j, int cn, int ant)
+static	void	ft_resout(t_lm *end, int j, int cn, int ant)
 {
 	int			i;
 
 	i = 0;
 	while (cn <= ant)
 	{
-		while (lm->link[i] && lm->link[i]->way[1] != j)
+		while (end->link[i] && end->link[i]->way[1] != j)
 			i++;
-		if (!lm->link[i])
+		if (!end->link[i])
 			j = 0;
-		else if (ft_printres(lm->link[i], j, 0, cn) && (cn += 1) && cn <= ant)
+		else if (ft_printres(end->link[i], j, 0, cn) && (cn += 1) && cn <= ant)
 			ft_printf(" ");
 		i = 0;
 		j++;
@@ -59,50 +60,30 @@ static	void	ft_resout(t_lm *lm, int j, int cn, int ant)
 	ft_printf("\n");
 }
 
-static	void	ft_lastout(t_lm *lm, int cn, int ants)
+void			ft_theway(t_lm *end, int cn, t_lm *bg, int *j)
 {
-	int			i;
-
-	i = 0;
-	while (lm->place != 3)
-	{
-		while (lm->link[i]->way[1] != 1 || lm->ex < lm->link[i]->ex)
-			i++;
-		lm = lm->link[i];
-		i = 0;
-	}
-	i = lm->ant[1] + 1;
-	if (cn)
-		ft_resout(lm, 1, i, ants);
-	else
-		while (lm->ant[1] != ants)
-			ft_resout(lm, 1, i, ants);
-}
-
-void			ft_theway(t_lm *lm, int cn, int i, int *j)
-{
-	int			res;
 	int			ant;
 	int			u;
+	int			i;
 
-	ant = 1;
-	while (lm->ant[1] != cn + ant - 1 && !(i = 0))
+	ant = 0;
+	while (cn && !(i = 0))
 	{
-		res = 0;
-		while (lm->link[i] && lm->link[i]->way[1] != j[0])
+		while (bg->link[i] && bg->link[i]->way[1] != j[0])
 			i++;
-		if (lm->link[i] || (j[0] = 0))
+		if (bg->link[i] || (j[0] = 0))
 		{
-			u = 0;
-			res = cn;
-			j[1] = j[0] - 1;
-			while (lm->link[u] && j[1])
-				if (lm->link[u++]->way[1] == j[1] && (j[1]--))
-					res -= (lm->link[i]->ex - lm->link[u - 1]->ex);
-			if ((res > 0 && (cn--)) || (j[0] = 0))
-				lm->link[i]->ant[0] = ant++;
+			u = -1;
+			j[1] = cn;
+			while (bg->link[++u] && j[0] > 1)
+				if (bg->link[u]->way[1] > 0 && bg->link[u]->way[1] < j[0])
+					j[1] -= (bg->link[i]->ex - bg->link[u]->ex);
+			if ((j[1] > 0 && (cn--)) || (j[0] = 0))
+				bg->link[i]->ant[0] = ++ant;
 		}
-		if ((j[0] += 1) == 1 || !cn)
-			ft_lastout(lm, cn, ant - 1);
+		if ((j[0] += 1) == 1)
+			ft_resout(end, 1, end->ant[1] + 1, ant);
+		while (!cn && end->ant[1] < ant)
+			ft_resout(end, 1, end->ant[1] + 1, ant);
 	}
 }

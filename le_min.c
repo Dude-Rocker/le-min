@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 15:21:05 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/23 14:30:06 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/25 13:25:18 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,6 @@ int				main(void)
 	if (ln)
 		free(ln);
 	ft_logic(ants, lm);
-	ft_printf("good\n");
+	ft_allfree(lm, 0, 0, 0);
 	return (0);
 }
