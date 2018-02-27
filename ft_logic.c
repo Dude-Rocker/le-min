@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 23:28:17 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/25 13:23:56 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/27 00:08:36 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,5 @@ void			ft_logic(int i, t_lm *lm)
 		ft_allfree(lm, 0, 0, 1);
 	bg->ex = 0;
 	startend(lm, bg, end, i);
-	ft_algoexit(end, i, bg);
+	ft_algoexit(end, i, bg, lm);
 }

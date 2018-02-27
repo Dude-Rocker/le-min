@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:52:56 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/25 17:22:56 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/27 12:29:47 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ static	int		ft_printres(t_lm *lm, int j, int i, int cn)
 	return (0);
 }
 
-static	void	ft_resout(t_lm *end, int j, int cn, int ant)
+static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
 {
 	int			i;
+	int			j;
+	int			xy[4];
 
 	i = 0;
+	j = 1;
 	while (cn <= ant)
 	{
 		while (end->link[i] && end->link[i]->way[1] != j)
@@ -57,33 +60,34 @@ static	void	ft_resout(t_lm *end, int j, int cn, int ant)
 		i = 0;
 		j++;
 	}
-	ft_printf("\n");
+	ft_printf("\n\n");
+	le_visual(lm, lm, xy, 0);
 }
 
-void			ft_theway(t_lm *end, int cn, t_lm *bg, int *j)
+void			ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j)
 {
 	int			ant;
 	int			u;
 	int			i;
 
 	ant = 0;
-	while (cn && !(i = 0))
+	while (j[2] && !(i = 0))
 	{
 		while (bg->link[i] && bg->link[i]->way[1] != j[0])
 			i++;
 		if (bg->link[i] || (j[0] = 0))
 		{
 			u = -1;
-			j[1] = cn;
+			j[1] = j[2];
 			while (bg->link[++u] && j[0] > 1)
 				if (bg->link[u]->way[1] > 0 && bg->link[u]->way[1] < j[0])
 					j[1] -= (bg->link[i]->ex - bg->link[u]->ex);
-			if ((j[1] > 0 && (cn--)) || (j[0] = 0))
+			if ((j[1] > 0 && (j[2] -= 1) > -1) || (j[0] = 0))
 				bg->link[i]->ant[0] = ++ant;
 		}
-		if ((j[0] += 1) == 1)
-			ft_resout(end, 1, end->ant[1] + 1, ant);
-		while (!cn && end->ant[1] < ant)
-			ft_resout(end, 1, end->ant[1] + 1, ant);
+		if ((j[0] += 1) == 1 && (bg->ant[1] = j[2]))
+			ft_resout(end, lm, end->ant[1] + 1, ant);
+		while (!j[2] && end->ant[1] < ant && !(bg->ant[1] = j[2]))
+			ft_resout(end, lm, end->ant[1] + 1, ant);
 	}
 }

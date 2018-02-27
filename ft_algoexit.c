@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:33:23 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/26 00:00:58 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/02/27 00:29:07 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static	void	srcexit(t_lm *lm, int a, int j, int i);
 
 static	int		changeway(t_lm *lm, int *a, int j, int i)
 {
-	// ft_printf("pp %s %d\n", lm->nm, lm->way[1]);
 	while (lm->link[++i])
 		if (lm->link[i]->ex == j && !lm->link[i]->way[1])
 			break ;
@@ -28,22 +27,16 @@ static	int		changeway(t_lm *lm, int *a, int j, int i)
 		while (lm->link[i] && lm->link[i]->way[1] != lm->way[1])
 			i++;
 		lm->way[1] *= -1;
-		// while (lm->link[i] && lm->link[i]->link[j]->nm != lm->nm)
-		// 	j++;
-		// ft_printf("1 %s %d\n", lm->link[i]->nm, lm->link[i]->way[1]);
 		if (lm->link[i] &&
 			!changeway(lm->link[i], a, lm->ex, -1))
 			srcexit(lm->link[i], lm->way[1] * -1, lm->way[0], -1);
-		// ft_printf("2 %s %d\n", lm->link[i]->nm, lm->link[i]->way[1]);
 		// if (lm->link[i] && lm->link[i]->way[1] > -1)
 		// {
 			lm->way[1] = 0;
 			lm->way[0] = 0;
 		// }
-		// ft_printf("3 %d\n", lm->link[i]->way[1]);
 		return (1);
 	}
-	// ft_printf("end %s\n", lm->link[i]->nm);
 	return (0);
 }
 
@@ -126,17 +119,18 @@ static	void	trueway(t_lm *lm, int i, int j, int o)
 	}
 }
 
-void			ft_algoexit(t_lm *lm, int a, t_lm *bg)
+void			ft_algoexit(t_lm *end, int a, t_lm *bg, t_lm *lm)
 {
-	int			j[2];
+	int			j[3];
 	int			i;
 	int			o;
 
 	j[0] = 1;
 	j[1] = 0;
+	j[2] = a;
 	i = -1;
 	o = 0;
-	lm->ex = -1;
+	end->ex = -1;
 	while (bg->link[++i])
 		if (bg->link[i]->ex)
 			o++;
@@ -145,5 +139,5 @@ void			ft_algoexit(t_lm *lm, int a, t_lm *bg)
 		srcexit(bg, i++, 1, -1);
 	rightway(bg, 0, 0, 0);
 	trueway(bg, 0, 0, 1);
-	ft_theway(lm, a, bg, j);
+	ft_theway(end, lm, bg, j);
 }
