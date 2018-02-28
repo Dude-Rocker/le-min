@@ -12,6 +12,32 @@
 
 #include "le_min.h"
 
+static	int		le_x_close(t_lm *lm, t_lm *tm, int *yx, int j)
+{
+	int			i;
+	t_lm		*bf;
+
+	i = 0;
+	while (tm->link && tm->link[i])
+	{
+		if (((!j && tm->link[i]->x >= yx[0]) || (j && tm->link[i]->x > yx[0]))
+			&& tm->link[i]->y == yx[1])
+		{
+			bf = lm;
+			while (bf)
+			{
+				if (bf->y == yx[1] && bf->x < tm->link[i]->x && bf->x > tm->x)
+					break ;
+				bf = bf->next;
+			}
+			if (!bf)
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 static	int		le_y_close(t_lm *lm, t_lm *tm, int *yx)
 {
 	int			i;
@@ -37,7 +63,7 @@ static	int		le_y_close(t_lm *lm, t_lm *tm, int *yx)
 	return (0);
 }
 
-static	int		le_x_far(t_lm *lm, t_lm *tm, int *yx)
+static	int		le_y_far(t_lm *lm, t_lm *tm, int *yx)
 {
 	int			i;
 	t_lm		*bf;
@@ -62,6 +88,20 @@ static	int		le_x_far(t_lm *lm, t_lm *tm, int *yx)
 	return (0);
 }
 
+static	int		le_x_far(t_lm *lm, t_lm *tm, int *yx)
+{
+	int			i;
+
+	i = 0;
+	while (tm->link && tm->link[i])
+	{
+		if (tm->link[i]->x == yx[0] + 1 && tm->link[i]->y > yx[1])
+				return (1);
+		i++;
+	}
+	return (0);
+}
+
 int				checklinks(t_lm *tm, int *yx, int i)
 {
 	t_lm		*bf;
@@ -73,11 +113,13 @@ int				checklinks(t_lm *tm, int *yx, int i)
 			return (1);
 		if (i == 1 && tm->y <= yx[1] && tm->x == yx[0] && le_y_close(bf, tm, yx))
 			return (1);
-		// if (i == 2 && tm->x < yx[0] && tm->y == xy[2] && le_y_far(bf, tm, yx))
-		// 	return (1);
-		// if (i == 3 && tm->y < yx[0] && tm->x == xy[2] && le_x_close(bf, tm, yx))
-		// 	return (1);
+		if (i == 2 && tm->x <= yx[0] && tm->y < yx[1] && le_y_far(bf, tm, yx))
+			return (1);
+		if (i == 3 && tm->x < yx[0] && tm->y == yx[1] && le_x_close(bf, tm, yx, 0))
+			return (1);
 		if (i == 5 && tm->x == yx[0] && tm->y == yx[1] && le_x_far(bf, tm, yx))
+			return (1);
+		if (i == 6 && tm->x <= yx[0] && tm->y == yx[1] && le_x_close(bf, tm, yx, 1))
 			return (1);
 		tm = tm->next;
 	}

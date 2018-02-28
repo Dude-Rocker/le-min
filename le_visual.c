@@ -12,28 +12,12 @@
 
 #include "le_min.h"
 
-static	void	drawlaststr(t_lm *lm, int *xy, char c, int i)
+static	void	drawlaststr(t_lm *lm, int *xy, int i, char c)
 {
 	if (!i)
-	// {
-		ft_printf("%c%c%c\n", (checklinks(lm, xy, 5) ? '_' : ' '),
-			(checklinks(lm, xy, 11) ? '|' : c), (checklinks(lm, xy, 11) ? '/' : ' '));
-	// 	c = (checklinks(lm, xy, 5) ? '_' : ' ');
-	// 	ft_printf("%c\n", c);
-	// 	c = (checklinks(lm, xy, 11) ? '|' : c);
-	// 	ft_printf("%c\n", c);
-	// 	c = (checklinks(lm, xy, 11) ? '/' : ' ');
-	// 	ft_printf("%c\n", c);
-	// }
-	if (i == 1)
-	{
-		c = (checklinks(lm, xy, 5) ? '_' : ' ');
-		ft_printf("%c\n", c);
-		c = (checklinks(lm, xy, 11) ? '|' : c);
-		ft_printf("%c\n", c);
-		c = (checklinks(lm, xy, 11) ? '/' : ' ');
-		ft_printf("%c\n", c);
-	}
+		ft_printf("%c%c%c", (c = (checklinks(lm, xy, 3) ? '-' : ' ')),
+		(checklinks(lm, xy, 2) ? '|' : c), (checklinks(lm, xy, 3) ? '-' : ' '));
+	// if (i == 1)
 }
 
 static	void	drawlinks(t_lm *lm, int *xy, int x, int y)
@@ -45,34 +29,34 @@ static	void	drawlinks(t_lm *lm, int *xy, int x, int y)
 
 	yx[0] = x;
 	yx[1] = y;
-	while (yx[0] <= xy[1] && (j = 8))
+	while (yx[0] <= xy[1])
 	{
+		j = 8;
+		drawlaststr(lm, yx, 0, ' ');
 		c = (yx[0] < xy[1] && checklinks(lm, yx, 0) ? '_' : ' ');
 		b = (checklinks(lm, yx, 1) ? '|' : c);
 		ft_printf("%c%c%c", c, b, c);
-		if (yx[0] < xy[1])
-		{
-			if ((checklinks(lm, yx, 5) && (c = '_')) || checklinks(lm, yx, 2))
-				ft_printf("%c", '\\');
-			else
-				ft_printf("%c", c);
-			while (j--)
-				ft_printf("%c", c);
-			ft_printf("   ");
-			// drawlaststr(lm, yx, ' ', 0);
-		}
+		ft_printf("%c", (checklinks(lm, yx, 5) && (c = '_')) ? '\\' : c);
+		while (j--)
+			ft_printf("%c", c);
 		yx[0] += 1;
 	}
 	ft_printf("\n");
 	// drawlaststr(lm, xy, ' ', 1);
 }
 
-static	void	printlem(char *t, int i)
+static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
 {
+	int			i;
 	int			j;
 	char		*s;
+	int			yx[2];
 
-	s = ft_strdup(t);
+	i = tm->ant[1];
+	yx[0] = min;
+	yx[1] = y;
+	drawlaststr(lm, yx, 0, ' ');
+	s = ft_strdup(tm->nm);
 	j = (!i ? (int)ft_strlen(s) - 3 : (int)ft_strlen(s) + ft_nbrlen(i, 1));
 	if (j > 7)
 	{
@@ -84,7 +68,10 @@ static	void	printlem(char *t, int i)
 	ft_printf("[%s", s);
 	if (i)
 		ft_printf(" L-%d", i);
-	ft_printf("%-*s", j, "]");
+	ft_printf("%c", ']');
+	*s = (checklinks(lm, yx, 6) ? '-' : ' ');
+	while (--j)
+		write(1, s, 1);
 	free(s);
 }
 
@@ -107,7 +94,7 @@ static	void	fillixy(t_lm *lm, int *xy, int t)
 		lm = lm->next;
 	}
 	t = xy[0];
-	ft_printf("y\\x");
+	ft_printf("y\\x   ");
 	while (t <= xy[1])
 		ft_printf("   %-12d", t++);
 	ft_printf("\n\n");
@@ -130,10 +117,9 @@ void			le_visual(t_lm *lm, t_lm *tm, int *xy, int min)
 				tm = tm->next;
 			}
 			if (tm)
-				printlem(tm->nm, tm->ant[1]);
+				printlem(tm, lm, min, xy[2]);
 			else
-				ft_printf("            ");
-			ft_printf("   ");
+				ft_printf(" -   - - -    ");
 			min++;
 		}
 		ft_printf("\n     ");
