@@ -6,43 +6,27 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:32:41 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/28 00:27:26 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/01 02:47:05 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "le_min.h"
 
-static	void	drawlaststr(t_lm *lm, int *xy, int i, char c)
+static	void	emptylem(t_lm *lm, int min, int y)
 {
-	if (!i)
-		ft_printf("%c%c%c", (c = (checklinks(lm, xy, 3) ? '-' : ' ')),
-		(checklinks(lm, xy, 2) ? '|' : c), (checklinks(lm, xy, 3) ? '-' : ' '));
-	// if (i == 1)
-}
-
-static	void	drawlinks(t_lm *lm, int *xy, int x, int y)
-{
-	char		c;
-	char		b;
-	int			yx[2];
 	int			j;
+	int			yx[2];
+	char		c;
 
-	yx[0] = x;
+	yx[0] = min;
 	yx[1] = y;
-	while (yx[0] <= xy[1])
-	{
-		j = 8;
-		drawlaststr(lm, yx, 0, ' ');
-		c = (yx[0] < xy[1] && checklinks(lm, yx, 0) ? '_' : ' ');
-		b = (checklinks(lm, yx, 1) ? '|' : c);
-		ft_printf("%c%c%c", c, b, c);
-		ft_printf("%c", (checklinks(lm, yx, 5) && (c = '_')) ? '\\' : c);
-		while (j--)
-			ft_printf("%c", c);
-		yx[0] += 1;
-	}
-	ft_printf("\n");
-	// drawlaststr(lm, xy, ' ', 1);
+	dreelinks(lm, yx, 0, 48);
+	j = 11;
+	c = ((checklinks(lm, yx, 3, 0) ? '-' : ' '));
+	write(1, &c, 1);
+	ft_printf("%c", (checklinks(lm, yx, 1, 0) ? '|' : c));
+	while (--j)
+		write(1, &c, 1);
 }
 
 static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
@@ -55,12 +39,11 @@ static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
 	i = tm->ant[1];
 	yx[0] = min;
 	yx[1] = y;
-	drawlaststr(lm, yx, 0, ' ');
+	dreelinks(lm, yx, 0, 48);
 	s = ft_strdup(tm->nm);
 	j = (!i ? (int)ft_strlen(s) - 3 : (int)ft_strlen(s) + ft_nbrlen(i, 1));
-	if (j > 7)
+	if (j > 7 && (j = (i ? 7 - ft_nbrlen(i, 1) : 10)))
 	{
-		j = (i ? 7 - ft_nbrlen(i, 1) : 10);
 		s[j - 1] = '.';
 		s[j] = 0;
 	}
@@ -69,7 +52,7 @@ static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
 	if (i)
 		ft_printf(" L-%d", i);
 	ft_printf("%c", ']');
-	*s = (checklinks(lm, yx, 6) ? '-' : ' ');
+	*s = (checklinks(lm, yx, 6, tm) ? '-' : ' ');
 	while (--j)
 		write(1, s, 1);
 	free(s);
@@ -119,11 +102,11 @@ void			le_visual(t_lm *lm, t_lm *tm, int *xy, int min)
 			if (tm)
 				printlem(tm, lm, min, xy[2]);
 			else
-				ft_printf(" -   - - -    ");
+				emptylem(lm, min, xy[2]);
 			min++;
 		}
 		ft_printf("\n     ");
-		drawlinks(lm, xy, xy[0], xy[2]);
+		drawlinks(lm, xy);
 		xy[2] += 1;
 	}
 }

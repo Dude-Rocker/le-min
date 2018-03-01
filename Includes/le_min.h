@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 14:37:27 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/28 00:05:23 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/01 00:43:08 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void				ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j);
 void				ft_creat(t_lm *lm, int i, int j, int k);
 void				ft_algoexit(t_lm *end, int a, t_lm *bg, t_lm *lm);
 void				le_visual(t_lm *lm, t_lm *tm, int *xy, int min);
-int					checklinks(t_lm *tm, int *yx, int i);
+int					checklinks(t_lm *tm, int *yx, int i, t_lm *sc);
+void				drawlinks(t_lm *lm, int *xy);
+void				dreelinks(t_lm *lm, int *xy, int i, char c);
 
 #endif

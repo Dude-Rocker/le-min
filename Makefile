@@ -6,7 +6,7 @@
 #    By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 21:48:14 by vgladush          #+#    #+#              #
-#    Updated: 2018/02/27 21:00:04 by vgladush         ###   ########.fr        #
+#    Updated: 2018/02/28 23:38:25 by vgladush         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ INC		= $(addprefix -I, $(INC_DIR))
 OBJS	= $(SRCS:.c=.o)
 
 SRCS	= le_min.c ft_error.c ft_logic.c ft_resout.c ft_algoexit.c le_visual.c \
-		checklinks.c
+		checklinks.c drawlinks.c
 
 all: $(NAME)
 
