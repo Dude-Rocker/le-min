@@ -31,7 +31,7 @@ SRCS	= le_min.c ft_error.c ft_logic.c ft_resout.c ft_algoexit.c le_visual.c \
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	# @make -C $(LB_PATH)
+	@make -C $(LB_PATH)
 	@gcc -o $(NAME) $(OBJ) $(LB_LINK)
 	@echo $(NAME) "ready"
 
@@ -44,7 +44,7 @@ clean:
 	@rm -rf $(OBJ_DIR)
 
 fclean:
-	# @make -C $(LB_PATH) fclean
+	@make -C $(LB_PATH) fclean
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(NAME)
 	@echo $(NAME) "deleted"

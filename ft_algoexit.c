@@ -30,11 +30,8 @@ static	int		changeway(t_lm *lm, int *a, int j, int i)
 		if (lm->link[i] &&
 			!changeway(lm->link[i], a, lm->ex, -1))
 			srcexit(lm->link[i], lm->way[1] * -1, lm->way[0], -1);
-		// if (lm->link[i] && lm->link[i]->way[1] > -1)
-		// {
 			lm->way[1] = 0;
 			lm->way[0] = 0;
-		// }
 		return (1);
 	}
 	return (0);

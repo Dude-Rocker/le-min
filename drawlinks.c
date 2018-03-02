@@ -30,10 +30,10 @@ void			dreelinks(t_lm *lm, int *xy, int i, char c)
 		ft_printf("%c", (checklinks(lm, xy, 9, 0) ? '\\' : ' '));
 		ft_printf("%c", (checklinks(lm, xy, 10, 0) ||
 			checklinks(lm, xy, 11, 0) ? '|' : ' '));
-		// xy[1] -= 1;
-		// ft_printf("%c", (checklinks(lm, xy, 10, 0) ||
-		// 	checklinks(lm, xy, 11, 0) ? '\\' : ' '));
-		// xy[1] += 1;
+		xy[1] -= 1;
+		ft_printf("%c", (checklinks(lm, xy, 10, 0) ||
+			checklinks(lm, xy, 11, 0) ? '\\' : ' '));
+		xy[1] += 1;
 	}
 }
 

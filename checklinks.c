@@ -102,15 +102,17 @@ static	int		le_x_far(t_lm *lm, t_lm *tm, int *yx, int j)
 	i = 0;
 	while (tm->link && tm->link[i])
 	{
-		if ((j && tm->link[i]->x == yx[0] && tm->link[i]->y < yx[1]) ||
-			(!j && tm->link[i]->x >= yx[0] && tm->link[i]->y > yx[1]))
+		if ((j != 8 && j && tm->link[i]->x == yx[0] && tm->link[i]->y < yx[1])
+			|| (!j && tm->link[i]->x > yx[0] && tm->link[i]->y > yx[1]))
 			return (1);
-		if (!j && tm->link[i]->x >= yx[0] && tm->link[i]->y == yx[1])
+		if ((!j && tm->link[i]->x >= yx[0] && tm->link[i]->y == yx[1]) ||
+			(j == 8 && tm->link[i]->y == yx[1] && tm->link[i]->x < yx[0]))
 		{
 			bf = lm;
 			while (bf)
 			{
-				if (bf->y == yx[1] && bf->x < tm->link[i]->x && bf->x > tm->x)
+				if (bf->y == yx[1] && (!j && bf->x < tm->link[i]->x && bf->x >
+				tm->x) || (j == 8 && bf->x > tm->link[i]->x && bf->x < tm->x))
 					return (1);
 				bf = bf->next;
 			}
@@ -135,14 +137,16 @@ int				checklinks(t_lm *tm, int *yx, int i, t_lm *sc)
 		if (i == 1 && tm->y <= yx[1] && tm->x == yx[0] && le_y_close(bf, tm, yx))
 			return (1);
 		if (((i == 10 && tm->y <= yx[1] && tm->x == yx[0]) || (tm->y < yx[1] &&
-			((i == 4 && tm->x == yx[0]) || (i == 2 && tm->x < yx[0]))) ||
-			(tm->y == yx[1] && ((i == 8 && tm->x == yx[0]) || (i == 9 && tm->x <
-			yx[0])))) && le_y_far(bf, tm, yx, i))
+			((i == 4 && tm->x == yx[0]) || (i == 2 && tm->x < yx[0]))) || (tm->y
+			== yx[1] && i == 9 && tm->x < yx[0])) && le_y_far(bf, tm, yx, i))
 			return (1);
 		if (((i == 3 && tm->x < yx[0] && tm->y == yx[1]) || (i == 11 &&
 			tm->y <= yx[1] && tm->x < yx[0])) && le_x_close(bf, tm, yx, i))
 			return (1);
 		if (i == 5 && tm->x == yx[0] && tm->y == yx[1] && le_x_far(bf, tm, yx, 0))
+			return (1);
+		if (i == 8 && tm->x == yx[0] && tm->y == yx[1] &&
+			(le_y_far(bf, tm, yx, i) || le_x_far(bf, tm, yx, i)))
 			return (1);
 		tm = tm->next;
 	}
