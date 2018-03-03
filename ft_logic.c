@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 23:28:17 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/03 19:38:00 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/04 00:40:13 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static	void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
 					ft_printf(" ");
 			}
 			ft_printf("\n\n");
+			end->ant[1] = j;
 			le_debug(cl, 1, xy, bg);
 			ft_allfree(cl, 0, 0, 0);
 			exit(1);
