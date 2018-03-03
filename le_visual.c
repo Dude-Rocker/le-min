@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:32:41 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/01 02:47:05 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/03 18:31:52 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static	void	emptylem(t_lm *lm, int min, int y)
 	yx[1] = y;
 	dreelinks(lm, yx, 0, 48);
 	j = 11;
-	c = ((checklinks(lm, yx, 3, 0) ? '-' : ' '));
+	c = ((checklinks(lm, yx, 3) ? '-' : ' '));
 	write(1, &c, 1);
-	ft_printf("%c", (checklinks(lm, yx, 1, 0) ? '|' : c));
+	ft_printf("%c", (checklinks(lm, yx, 4) ? '|' : c));
 	while (--j)
 		write(1, &c, 1);
 }
@@ -52,7 +52,7 @@ static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
 	if (i)
 		ft_printf(" L-%d", i);
 	ft_printf("%c", ']');
-	*s = (checklinks(lm, yx, 6, tm) ? '-' : ' ');
+	*s = (checklinks(lm, yx, 3) ? '-' : ' ');
 	while (--j)
 		write(1, s, 1);
 	free(s);

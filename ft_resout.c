@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:52:56 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/27 12:29:47 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/03 19:27:47 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
 		j++;
 	}
 	ft_printf("\n\n");
-	le_visual(lm, lm, xy, 0);
+	if (lm->st)
+		lm->st += 1;
+	if (lm->vs)
+		le_visual(lm, lm, xy, 0);
 }
 
 void			ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j)

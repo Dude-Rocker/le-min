@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 14:37:27 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/01 00:43:08 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/03 19:33:37 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 typedef	struct		s_lm
 {
+	int				ants;
+	int				vs;
+	int				st;
+	int				sh;
 	char			*nm;
 	int				place;
 	int				x;
@@ -36,8 +40,10 @@ void				ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j);
 void				ft_creat(t_lm *lm, int i, int j, int k);
 void				ft_algoexit(t_lm *end, int a, t_lm *bg, t_lm *lm);
 void				le_visual(t_lm *lm, t_lm *tm, int *xy, int min);
-int					checklinks(t_lm *tm, int *yx, int i, t_lm *sc);
+int					checklinks(t_lm *tm, int *yx, int i);
 void				drawlinks(t_lm *lm, int *xy);
 void				dreelinks(t_lm *lm, int *xy, int i, char c);
+void				le_flags(int i, char **b, t_lm *lm, int a);
+void				le_debug(t_lm *lm, int f, int *xy, t_lm *bg);
 
 #endif

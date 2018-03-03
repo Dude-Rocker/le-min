@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 19:30:08 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/01 14:39:43 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/03 18:31:39 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ static	int		le_x_close(t_lm *lm, t_lm *tm, int *yx, int j)
 	i = 0;
 	while (tm->link && tm->link[i])
 	{
-		if (j == 11 && tm->link[i]->x == yx[0] && tm->link[i]->y > yx[1] + 1)
-			return (1);
-		if ((((!j || j == 3) && tm->link[i]->x >= yx[0]) || (j == 7
-			&& tm->link[i]->x > yx[0])) && tm->link[i]->y == yx[1])
+		if (((!j && tm->link[i]->x >= yx[0]) || (j == 3 && tm->link[i]->x >
+			yx[0])) && tm->link[i]->y == yx[1])
 		{
 			bf = lm;
 			while (bf)
@@ -70,26 +68,26 @@ static	int		le_y_far(t_lm *lm, t_lm *tm, int *yx, int j)
 	int			i;
 	t_lm		*bf;
 
-	i = 0;
-	while (tm->link && tm->link[i])
+	i = -1;
+	while (tm->link && tm->link[++i])
 	{
-		if (((i == 10 && tm->link[i]->x < yx[0] && tm->link[i]->y > yx[1] + 1)
-			|| (j == 9 && tm->link[i]->y > yx[1] + 1 && tm->link[i]->x == yx[0])
-			|| (tm->link[i]->y > yx[1] && ((j == 2 && tm->link[i]->x == yx[0])
-			|| ((j == 4 || j == 8) && tm->link[i]->x < yx[0])))))
+		if ((((j == 1 || j == 7) && tm->link[i]->y > yx[1]) || ((j == 2 ||
+			j == 5) && tm->link[i]->y > yx[1] + 1)) && tm->link[i]->x < yx[0])
 			return (1);
-		if (tm->link[i]->x == yx[0] && (((j == 4 || j == 8) && tm->link[i]->y >
-			yx[1]) || (j == 10 && tm->link[i]->y > yx[1] + 1)))
+		if (tm->link[i]->x == yx[0] && ((j != 5 && j != 11 && tm->link[i]->y >
+			yx[1]) || (j == 5 && tm->link[i]->y > yx[1] + 1) || (j == 11 &&
+			tm->link[i]->y < yx[1])))
 		{
 			bf = lm;
 			while (bf)
 			{
-				if (bf->x == yx[0] && bf->y < tm->link[i]->y && bf->y > tm->y)
+				if (bf->x == yx[0] && ((j != 11 && bf->y < tm->link[i]->y &&
+					bf->y > tm->y) || (j == 11 && bf->y > tm->link[i]->y &&
+					bf->y < tm->y)))
 					return (1);
 				bf = bf->next;
 			}
 		}
-		i++;
 	}
 	return (0);
 }
@@ -102,17 +100,16 @@ static	int		le_x_far(t_lm *lm, t_lm *tm, int *yx, int j)
 	i = 0;
 	while (tm->link && tm->link[i])
 	{
-		if ((j != 8 && j && tm->link[i]->x == yx[0] && tm->link[i]->y < yx[1])
-			|| (!j && tm->link[i]->x > yx[0] && tm->link[i]->y > yx[1]))
+		if ((tm->link[i]->x > yx[0] && tm->link[i]->y > yx[1]) ||
+			(j == 8 && tm->link[i]->x == yx[0] && tm->link[i]->y == yx[1] + 1))
 			return (1);
-		if ((!j && tm->link[i]->x >= yx[0] && tm->link[i]->y == yx[1]) ||
-			(j == 8 && tm->link[i]->y == yx[1] && tm->link[i]->x < yx[0]))
+		if ((((j == 8 || j == 12) && tm->link[i]->x >= yx[0]) || ((j == 9 ||
+			j == 10) && tm->link[i]->x > yx[0])) && tm->link[i]->y == yx[1])
 		{
 			bf = lm;
 			while (bf)
 			{
-				if (bf->y == yx[1] && (!j && bf->x < tm->link[i]->x && bf->x >
-				tm->x) || (j == 8 && bf->x > tm->link[i]->x && bf->x < tm->x))
+				if (bf->y == yx[1] && bf->x < tm->link[i]->x && bf->x >	tm->x)
 					return (1);
 				bf = bf->next;
 			}
@@ -122,31 +119,28 @@ static	int		le_x_far(t_lm *lm, t_lm *tm, int *yx, int j)
 	return (0);
 }
 
-int				checklinks(t_lm *tm, int *yx, int i, t_lm *sc)
+int				checklinks(t_lm *tm, int *yx, int i)
 {
 	t_lm		*bf;
 
 	bf = tm;
-	if (i == 6)
-		return (le_x_close(bf, sc, yx, 7));
 	while (tm)
 	{
-		if (tm->x < yx[0] && ((!i && tm->y == yx[1]) || (i == 7 &&
-			tm->y == yx[1] + 1)) && le_x_far(bf, tm, yx, i))
+		if (((!i && tm->x < yx[0]) || (i == 3 && tm->x <= yx[0])) && tm->y ==
+			yx[1] && le_x_close(bf, tm, yx, i))
 			return (1);
-		if (i == 1 && tm->y <= yx[1] && tm->x == yx[0] && le_y_close(bf, tm, yx))
+		if ((((i == 1 || i == 2) && tm->y < yx[1]) || (i == 5 && tm->y <= yx[1])
+			|| ((i == 6 || i == 11) && tm->y == yx[1] + 1) || (i == 7 && tm->y
+			== yx[1])) && tm->x == yx[0] && le_y_far(bf, tm, yx, i))
 			return (1);
-		if (((i == 10 && tm->y <= yx[1] && tm->x == yx[0]) || (tm->y < yx[1] &&
-			((i == 4 && tm->x == yx[0]) || (i == 2 && tm->x < yx[0]))) || (tm->y
-			== yx[1] && i == 9 && tm->x < yx[0])) && le_y_far(bf, tm, yx, i))
+		if (i == 4 && tm->x == yx[0] && tm->y <= yx[1] &&
+			le_y_close(bf, tm, yx))
 			return (1);
-		if (((i == 3 && tm->x < yx[0] && tm->y == yx[1]) || (i == 11 &&
-			tm->y <= yx[1] && tm->x < yx[0])) && le_x_close(bf, tm, yx, i))
+		if ((i == 8 || i == 9 || i == 12) && tm->x < yx[0] && tm->y == yx[1] &&
+			le_x_far(bf, tm, yx, i))
 			return (1);
-		if (i == 5 && tm->x == yx[0] && tm->y == yx[1] && le_x_far(bf, tm, yx, 0))
-			return (1);
-		if (i == 8 && tm->x == yx[0] && tm->y == yx[1] &&
-			(le_y_far(bf, tm, yx, i) || le_x_far(bf, tm, yx, i)))
+		if (i == 10 && tm->x == yx[0] && tm->y == yx[1] &&
+			le_x_far(bf, tm, yx, i))
 			return (1);
 		tm = tm->next;
 	}

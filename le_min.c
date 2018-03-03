@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 15:21:05 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/25 13:25:18 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/03 18:57:31 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static	void	writevalue(t_lm **lm, int i, char *s, int r)
 	free(nm);
 }
 
-int				main(void)
+int				main(int ac, char **av)
 {
 	t_lm		*lm;
 	char		*ln;
@@ -137,6 +137,7 @@ int				main(void)
 	}
 	if (ln)
 		free(ln);
+	le_flags(ac, av, lm, ants);
 	ft_logic(ants, lm);
 	ft_allfree(lm, 0, 0, 0);
 	return (0);

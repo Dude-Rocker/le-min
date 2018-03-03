@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 23:28:17 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/27 00:08:36 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/03 19:38:00 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static	void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
 {
 	int			i;
 	int			ant;
+	int			xy[4];
 
 	i = 0;
 	ant = 0;
@@ -29,7 +30,8 @@ static	void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
 				if (ant < j)
 					ft_printf(" ");
 			}
-			ft_printf("\n");
+			ft_printf("\n\n");
+			le_debug(cl, 1, xy, bg);
 			ft_allfree(cl, 0, 0, 0);
 			exit(1);
 		}
@@ -41,6 +43,10 @@ void			ft_creat(t_lm *lm, int i, int j, int k)
 {
 	if (k)
 	{
+		lm->vs = 0;
+		lm->st = 0;
+		lm->sh = 0;
+		lm->ants = 0;
 		lm->next = 0;
 		lm->link = 0;
 		lm->ant[0] = 0;
@@ -135,4 +141,5 @@ void			ft_logic(int i, t_lm *lm)
 	bg->ex = 0;
 	startend(lm, bg, end, i);
 	ft_algoexit(end, i, bg, lm);
+	le_debug(lm, 0, 0, bg);
 }

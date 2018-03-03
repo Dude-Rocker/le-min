@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:33:23 by vgladush          #+#    #+#             */
-/*   Updated: 2018/02/27 00:29:07 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:19:31 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static	int		changeway(t_lm *lm, int *a, int j, int i)
 		if (lm->link[i] &&
 			!changeway(lm->link[i], a, lm->ex, -1))
 			srcexit(lm->link[i], lm->way[1] * -1, lm->way[0], -1);
-			lm->way[1] = 0;
-			lm->way[0] = 0;
+		lm->way[1] = 0;
+		lm->way[0] = 0;
 		return (1);
 	}
 	return (0);

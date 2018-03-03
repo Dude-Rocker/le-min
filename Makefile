@@ -6,13 +6,13 @@
 #    By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 21:48:14 by vgladush          #+#    #+#              #
-#    Updated: 2018/02/28 23:38:25 by vgladush         ###   ########.fr        #
+#    Updated: 2018/03/03 20:30:03 by vgladush         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= lem-in
 
-GC_FLGS = gcc -Wall -Wextra 
+GC_FLGS = gcc -Wall -Wextra -Werror
 
 SRC_DIR = ./
 INC_DIR = ./Includes/ $(LB_PATH)/Includes/
