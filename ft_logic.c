@@ -50,6 +50,7 @@ void			ft_creat(t_lm *lm, int i, int j, int k)
 		lm->ants = 0;
 		lm->next = 0;
 		lm->link = 0;
+		lm->color = 0;
 		lm->ant[0] = 0;
 		lm->ant[1] = 0;
 		lm->way[0] = 0;

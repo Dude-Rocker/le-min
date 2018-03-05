@@ -14,10 +14,13 @@
 # define LE_MIN_H
 
 # include "libft.h"
+# define COLOR_RESET "\x1B[0m"
+# define RED "\x1B[31m"
 
 typedef	struct		s_lm
 {
 	int				ants;
+	int				color;
 	int				vs;
 	int				st;
 	int				sh;

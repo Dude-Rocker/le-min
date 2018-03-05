@@ -60,7 +60,7 @@ static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
 		i = 0;
 		j++;
 	}
-	ft_printf("\n\n");
+	ft_printf("\n");
 	if (lm->st)
 		lm->st += 1;
 	if (lm->vs)

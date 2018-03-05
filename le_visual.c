@@ -50,7 +50,7 @@ static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
 	j = (i ? 8 - ft_nbrlen(i, 1) - ft_strlen(s) : 11 - ft_strlen(s));
 	ft_printf("[%s", s);
 	if (i)
-		ft_printf(" L-%d", i);
+		ft_printf(" %sL-%d%s", (lm->color ? RED : ""), i, (lm->color ? COLOR_RESET : ""));
 	ft_printf("%c", ']');
 	*s = (checklinks(lm, yx, 3) ? '-' : ' ');
 	while (--j)
@@ -77,7 +77,7 @@ static	void	fillixy(t_lm *lm, int *xy, int t)
 		lm = lm->next;
 	}
 	t = xy[0];
-	ft_printf("y\\x   ");
+	ft_printf("\ny\\x   ");
 	while (t <= xy[1])
 		ft_printf("   %-12d", t++);
 	ft_printf("\n\n");
@@ -95,7 +95,7 @@ void			le_visual(t_lm *lm, t_lm *tm, int *xy, int min)
 			tm = lm;
 			while (tm)
 			{
-				if(tm->x == min && tm->y == xy[2])
+				if (tm->x == min && tm->y == xy[2])
 					break ;
 				tm = tm->next;
 			}

@@ -109,7 +109,7 @@ static	int		le_x_far(t_lm *lm, t_lm *tm, int *yx, int j)
 			bf = lm;
 			while (bf)
 			{
-				if (bf->y == yx[1] && bf->x < tm->link[i]->x && bf->x >	tm->x)
+				if (bf->y == yx[1] && bf->x < tm->link[i]->x && bf->x > tm->x)
 					return (1);
 				bf = bf->next;
 			}

@@ -46,6 +46,7 @@ static	int		checkval(char **s, int j, int *i)
 			*i = 3;
 		if (j > 1 || (j > 0 && !*i))
 			return (0);
+		ft_printf("%s\n", *s);
 		free(*s);
 		get_next_line(0, s);
 	}
@@ -54,13 +55,12 @@ static	int		checkval(char **s, int j, int *i)
 	j = 0;
 	while (s[0][j] && s[0][j] != ' ' && s[0][j] != '-')
 		j++;
+	ft_printf("%s\n", *s);
 	if (s[0][j] == '-')
 		*i = 0;
 	else if (*i && s[0][j] == ' ' && j++)
 		return (chvalsec(*s, j));
-	else if ((!*i && s[0][j] != '-') || (*i && s[0][j] != ' '))
-		return (0);
-	return (1);
+	return ((!*i && s[0][j] != '-') || (*i && s[0][j] != ' ') ? 0 : 1);
 }
 
 static	void	wrvalsec(t_lm *lm, int *xy, char *s, char *nm)

@@ -43,7 +43,7 @@ static	int		farlinks(t_lm *tm, int *yx, int i)
 		if (i == 1 && tm->x == yx[0] && tm->y > yx[1] + 1 &&
 			checkfar(tm, yx, i, 0))
 			return (1);
-		if (((i == 2  && tm->y == yx[1]) || (i == 5 && tm->y == yx[1] + 1)) &&
+		if (((i == 2 && tm->y == yx[1]) || (i == 5 && tm->y == yx[1] + 1)) &&
 			tm->x < yx[0] && checkfar(tm, yx, i, 0))
 			return (1);
 		if ((((i == 3 || i == 4) && tm->x == yx[0]) || (i == 8 && tm->x <=
