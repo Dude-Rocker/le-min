@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 14:37:27 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/03 19:33:37 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/05 23:13:10 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 # define LE_MIN_H
 
 # include "libft.h"
-# define COLOR_RESET "\x1B[0m"
-# define RED "\x1B[31m"
+# define RD "\x1B[35m"
+# define YL "\x1B[33m"
+# define WT "\x1B[37m"
+# define GR "\x1B[32m"
 
 typedef	struct		s_lm
 {
 	int				ants;
-	int				color;
+	int				clr;
 	int				vs;
 	int				st;
 	int				sh;

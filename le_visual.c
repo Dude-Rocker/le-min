@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:32:41 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/03 18:31:52 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/05 23:03:02 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
 		s[j] = 0;
 	}
 	j = (i ? 8 - ft_nbrlen(i, 1) - ft_strlen(s) : 11 - ft_strlen(s));
-	ft_printf("[%s", s);
 	if (i)
-		ft_printf(" %sL-%d%s", (lm->color ? RED : ""), i, (lm->color ? COLOR_RESET : ""));
-	ft_printf("%c", ']');
+		ft_printf("%s[%s L-%d]%s", (lm->clr ? RD : WT), s, i, WT);
+	else
+		ft_printf("%s[%s]%s", (lm->clr ? YL : WT), s, WT);
 	*s = (checklinks(lm, yx, 3) ? '-' : ' ');
 	while (--j)
 		write(1, s, 1);

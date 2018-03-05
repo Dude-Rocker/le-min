@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 23:28:17 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/04 00:40:13 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/05 23:13:05 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
 		{
 			while (ant++ < j)
 			{
-				ft_printf("L%d-%s", ant, end->nm);
+				ft_printf("%sL%d-%s%s", (cl->clr ? GR : RD), ant, end->nm, WT);
 				if (ant < j)
 					ft_printf(" ");
 			}
@@ -50,7 +50,7 @@ void			ft_creat(t_lm *lm, int i, int j, int k)
 		lm->ants = 0;
 		lm->next = 0;
 		lm->link = 0;
-		lm->color = 0;
+		lm->clr = 0;
 		lm->ant[0] = 0;
 		lm->ant[1] = 0;
 		lm->way[0] = 0;

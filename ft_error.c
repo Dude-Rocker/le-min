@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 20:47:13 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/03 20:05:49 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/05 23:31:42 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 	if (f && lm->vs)
 		le_visual(lm, lm, xy, 0);
 	if (lm->ants)
-		ft_printf("There were ants: %d\n", lm->ants);
+		ft_printf("There were ants: %s%d%s\n", (lm->clr ? RD : WT),
+			lm->ants, WT);
 	if (f && lm->st)
-		ft_printf("Only one step: start-finish\n");
+		ft_printf("Only one step: %sstart-finish%s\n", (lm->clr ? GR : WT), WT);
 	if (!f && lm->st)
-		ft_printf("Total steps: %d\n", lm->st - 1);
+		ft_printf("Total steps: %s%d%s\n", (lm->clr ? YL : WT), lm->st - 1, WT);
 	if (lm->sh)
 		ft_printf("Shortest path: ");
 	while (lm->sh && bg->place != 3)
@@ -62,15 +63,14 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 			(bg->link[f]->ex > bg->ex && bg->place != 1)))
 			f++;
 		bg = bg->link[f];
-		if (!bg)
-			exit(printf("asdfsfd\n"));
 	}
 	if (lm->sh)
-		ft_printf("[%s]\n", bg->nm);
+		ft_printf("%s[%s]%s\n", (lm->clr ? GR : WT), bg->nm, WT);
 }
 
 void	le_flags(int i, char **b, t_lm *lm, int a)
 {
+	write(1, "\n", 1);
 	if (i < 2)
 		return ;
 	while (--i)
@@ -84,6 +84,6 @@ void	le_flags(int i, char **b, t_lm *lm, int a)
 		if (!ft_strcmp(b[i], "-ants"))
 			lm->ants = a;
 		if (!ft_strcmp(b[i], "-color"))
-			lm->color = 1;
+			lm->clr = 1;
 	}
 }

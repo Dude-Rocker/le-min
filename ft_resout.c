@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:52:56 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/03 19:27:47 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/05 23:26:06 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static	int		ft_printres(t_lm *lm, int j, int i, int cn)
 		lm->link[i]->ant[0] = 0;
 		return (1);
 	}
-	if (cn == lm->ant[1])
+	if (cn == lm->ant[1] && (lm->link[i]->ant[1] = lm->ant[1]))
 	{
-		ft_printf("L%d-%s", lm->ant[1], lm->link[i]->nm);
-		lm->link[i]->ant[1] = lm->ant[1];
+		ft_printf("%sL%d-%s%s", (lm->clr ? GR : WT), lm->ant[1],
+			lm->link[i]->nm, WT);
 		lm->ant[1] = 0;
 		return (1);
 	}
@@ -53,7 +53,7 @@ static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
 	{
 		while (end->link[i] && end->link[i]->way[1] != j)
 			i++;
-		if (!end->link[i])
+		if (!end->link[i] || ((lm->clr) && !(end->link[i]->clr = 1)))
 			j = 0;
 		else if (ft_printres(end->link[i], j, 0, cn) && (cn += 1) && cn <= ant)
 			ft_printf(" ");
