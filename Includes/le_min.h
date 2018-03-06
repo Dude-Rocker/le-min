@@ -27,7 +27,7 @@ typedef	struct		s_lm
 	int				st;
 	int				sh;
 	char			*nm;
-	int				place;
+	int				plc;
 	int				x;
 	int				y;
 	int				ex;

@@ -26,7 +26,7 @@ static	void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
 		{
 			while (ant++ < j)
 			{
-				ft_printf("%sL%d-%s%s", (cl->clr ? GR : RD), ant, end->nm, WT);
+				ft_printf("%sL%d-%s%s", (cl->clr ? GR : WT), ant, end->nm, WT);
 				if (ant < j)
 					ft_printf(" ");
 			}
@@ -130,13 +130,13 @@ void			ft_logic(int i, t_lm *lm)
 	end = lm;
 	if (!lm)
 		exit(ft_printf("ERROR\n"));
-	while (end && end->place != 3)
+	while (end && end->plc != 3)
 		end = end->next;
 	if (!end || !end->link)
 		ft_allfree(lm, 0, 0, 1);
 	ft_creat(end, 0, 0, 0);
 	end->ex = 0;
-	while (bg && bg->place != 1)
+	while (bg && bg->plc != 1)
 		bg = bg->next;
 	if (!bg || !bg->ex)
 		ft_allfree(lm, 0, 0, 1);

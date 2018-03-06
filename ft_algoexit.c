@@ -42,18 +42,18 @@ static	void	srcexit(t_lm *lm, int a, int j, int i)
 	int			p;
 	int			m;
 
-	while (lm->place != 3 && !(p = 0))
+	while (lm->plc != 3 && !(p = 0))
 	{
 		m = 0;
 		while (lm->link[++i])
 		{
-			if ((lm->link[i]->place == 3 || (lm->link[i]->ex && ((lm->place != 1
-				&& lm->link[i]->way[1] > -1) || (lm->place == 1 &&
+			if ((lm->link[i]->plc == 3 || (lm->link[i]->ex && ((lm->plc != 1
+				&& lm->link[i]->way[1] > -1) || (lm->plc == 1 &&
 				!lm->link[i]->way[1])) && (!m || lm->link[i]->ex < m)))
 				&& (m = lm->link[i]->ex))
 				p = i;
 		}
-		if (lm->link[p]->place != 3 && (i = -1))
+		if (lm->link[p]->plc != 3 && (i = -1))
 		{
 			if (lm->link[p]->way[1])
 				if (changeway(lm, &p, lm->link[p]->ex, -1))
@@ -70,9 +70,9 @@ static	void	rightway(t_lm *lm, int i, int j, int o)
 	if (i)
 	{
 		lm->way[1] = i;
-		while (lm->link[o]->way[1] != j && lm->link[o]->place != 3)
+		while (lm->link[o]->way[1] != j && lm->link[o]->plc != 3)
 			o++;
-		if (lm->link[o]->place != 3)
+		if (lm->link[o]->plc != 3)
 			rightway(lm->link[o], i, j, 0);
 		return ;
 	}
@@ -134,6 +134,8 @@ void			ft_algoexit(t_lm *end, int a, t_lm *bg, t_lm *lm)
 	i = 1;
 	while (o--)
 		srcexit(bg, i++, 1, -1);
+	minull(bg, 0, end);
+	i = 0;
 	rightway(bg, 0, 0, 0);
 	trueway(bg, 0, 0, 1);
 	ft_theway(end, lm, bg, j);

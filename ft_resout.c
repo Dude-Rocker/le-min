@@ -14,27 +14,27 @@
 
 static	int		ft_printres(t_lm *lm, int j, int i, int cn)
 {
-	while (!(i = 0) && lm->place != 1 && cn != lm->ant[1])
+	while (!(i = 0) && lm->plc != 1 && cn != lm->ant[1])
 	{
-		while (lm->link[i]->place != 1 && (lm->link[i]->way[1] != j ||
+		while (lm->link[i]->plc != 1 && (lm->link[i]->way[1] != j ||
 			lm->ex > lm->link[i]->ex))
 			i++;
 		lm = lm->link[i];
 	}
-	while (lm->link[i]->place != 3 && (lm->link[i]->way[1] != j ||
-		(lm->place != 1 && lm->ex < lm->link[i]->ex)))
+	while (lm->link[i]->plc != 3 && (lm->link[i]->way[1] != j ||
+		(lm->plc != 1 && lm->ex < lm->link[i]->ex)))
 		i++;
-	if (lm->place == 1 && lm->link[i]->ant[0] == cn)
+	if (lm->plc == 1 && lm->link[i]->ant[0] == cn)
 	{
 		ft_printf("L%d-%s", lm->link[i]->ant[0], lm->link[i]->nm);
 		lm->link[i]->ant[1] = lm->link[i]->ant[0];
 		lm->link[i]->ant[0] = 0;
 		return (1);
 	}
-	if (cn == lm->ant[1] && (lm->link[i]->ant[1] = lm->ant[1]))
+	if (lm->plc != 1 && cn == lm->ant[1] && (lm->link[i]->ant[1] = lm->ant[1]))
 	{
-		ft_printf("%sL%d-%s%s", (lm->clr ? GR : WT), lm->ant[1],
-			lm->link[i]->nm, WT);
+		ft_printf("%sL%d-%s%s", (lm->clr && lm->link[i]->plc == 3 ? GR : WT),
+			lm->ant[1], lm->link[i]->nm, WT);
 		lm->ant[1] = 0;
 		return (1);
 	}
@@ -94,3 +94,14 @@ void			ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j)
 			ft_resout(end, lm, end->ant[1] + 1, ant);
 	}
 }
+
+void			minull(t_lm *bg, int i, t_lm *end)
+{
+	while (bg->link[i])
+	{
+		if (bg->link[i]->way[1] < 0)
+			bg->link[i]->way[1] = 0;
+		i++;
+	}
+}
+

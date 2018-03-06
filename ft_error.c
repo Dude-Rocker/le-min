@@ -14,6 +14,7 @@
 
 void	outerror(char *s, int j, int i)
 {
+	ft_printf("%s\n", s);
 	while (s[i] && s[i] > 47 && s[i] < 58)
 		i++;
 	if (s[i] || j < 1)
@@ -55,12 +56,12 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 		ft_printf("Total steps: %s%d%s\n", (lm->clr ? YL : WT), lm->st - 1, WT);
 	if (lm->sh)
 		ft_printf("Shortest path: ");
-	while (lm->sh && bg->place != 3)
+	while (lm->sh && bg->plc != 3)
 	{
 		f = 0;
 		ft_printf("[%s] >>> ", bg->nm);
-		while (bg->link[f]->place != 3 && (bg->link[f]->way[1] != 1 ||
-			(bg->link[f]->ex > bg->ex && bg->place != 1)))
+		while (bg->link[f]->plc != 3 && (bg->link[f]->way[1] != 1 ||
+			(bg->link[f]->ex > bg->ex && bg->plc != 1)))
 			f++;
 		bg = bg->link[f];
 	}

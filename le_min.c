@@ -73,7 +73,7 @@ static	void	wrvalsec(t_lm *lm, int *xy, char *s, char *nm)
 	while (lm)
 	{
 		if ((lm->x == xy[0] && lm->y == xy[1]) || !ft_strcmp(nm, lm->nm)
-			|| (xy[2] != 2 && lm->place == xy[2]))
+			|| (xy[2] != 2 && lm->plc == xy[2]))
 			ft_allfree(st, nm, s, 1);
 		ml = lm;
 		lm = lm->next;
@@ -82,7 +82,7 @@ static	void	wrvalsec(t_lm *lm, int *xy, char *s, char *nm)
 		return ;
 	ml->next->x = xy[0];
 	ml->next->y = xy[1];
-	ml->next->place = xy[2];
+	ml->next->plc = xy[2];
 	ml->next->nm = ft_strdup(nm);
 	ft_creat(ml->next, 0, 0, 1);
 }
@@ -105,7 +105,7 @@ static	void	writevalue(t_lm **lm, int i, char *s, int r)
 			return ;
 		(*lm)->x = xy[0];
 		(*lm)->y = xy[1];
-		(*lm)->place = r;
+		(*lm)->plc = r;
 		(*lm)->nm = ft_strdup(nm);
 		ft_creat(*lm, 0, 0, 1);
 	}
