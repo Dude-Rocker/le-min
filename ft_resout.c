@@ -95,7 +95,7 @@ void			ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j)
 	}
 }
 
-void			minull(t_lm *bg, int i, t_lm *end)
+void			minull(t_lm *bg, int i)
 {
 	while (bg->link[i])
 	{

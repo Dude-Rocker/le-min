@@ -134,7 +134,7 @@ void			ft_algoexit(t_lm *end, int a, t_lm *bg, t_lm *lm)
 	i = 1;
 	while (o--)
 		srcexit(bg, i++, 1, -1);
-	minull(bg, 0, end);
+	minull(bg, 0);
 	i = 0;
 	rightway(bg, 0, 0, 0);
 	trueway(bg, 0, 0, 1);

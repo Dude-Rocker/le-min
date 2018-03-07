@@ -50,5 +50,6 @@ void				drawlinks(t_lm *lm, int *xy);
 void				dreelinks(t_lm *lm, int *xy, int i, char c);
 void				le_flags(int i, char **b, t_lm *lm, int a);
 void				le_debug(t_lm *lm, int f, int *xy, t_lm *bg);
+void				minull(t_lm *bg, int i);
 
 #endif
