@@ -18,6 +18,7 @@
 # define YL "\x1B[33m"
 # define WT "\x1B[37m"
 # define GR "\x1B[32m"
+# define BL "\x1B[36m"
 
 typedef	struct		s_lm
 {

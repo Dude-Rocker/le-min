@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 17:42:59 by vgladush          #+#    #+#             */
-/*   Updated: 2018/01/15 14:54:56 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/07 22:50:15 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,63 +37,6 @@ char			*ft_qstr(char *s, int *i)
 		i[1] += write(1, " ", 1);
 	free(res);
 	return (s);
-}
-
-static	char	*ft_rotng(char *s, int i)
-{
-	char		*r;
-	char		*res;
-	int			a;
-
-	if (!*s)
-		return (0);
-	i = -i;
-	if (!(r = (char *)malloc(ft_strlen(s) + 1)))
-		return (0);
-	res = r;
-	while (*s)
-	{
-		a = i;
-		if (*s > 64 && *s < 91)
-			while (*s - a < 65)
-				a -= 26;
-		else if (*s > 96 && *s < 123)
-			while (*s - a < 97)
-				a -= 26;
-		else
-			a = 0;
-		*r++ = *s++ - a;
-	}
-	*r = '\0';
-	return (res);
-}
-
-char			*ft_rotnb(char *s, int i)
-{
-	char		*r;
-	char		*res;
-	int			a;
-
-	if (i < 0 || !*s)
-		return (ft_rotng(s, i));
-	if (!(r = (char *)malloc(ft_strlen(s) + 1)))
-		return (0);
-	res = r;
-	while (*s)
-	{
-		a = i;
-		if (*s > 64 && *s < 91)
-			while ((int)*s + a > 90)
-				a -= 26;
-		else if ((int)*s > 96 && *s < 123)
-			while ((int)*s + a > 122)
-				a -= 26;
-		else
-			a = 0;
-		*r++ = *s++ + a;
-	}
-	*r = '\0';
-	return (res);
 }
 
 static	void	outunsec(char *s, int *i, int j, int c)

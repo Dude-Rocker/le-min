@@ -12,6 +12,27 @@
 
 #include "le_min.h"
 
+static  void    printcolor(t_lm *lm, char *s, int i,t_lm *tm)
+{
+	char        *r;
+
+	if (lm->clr && tm->plc == 1)
+		r = ft_strdup(BL);
+	else if (lm->clr && tm->plc == 3)
+		r = ft_strdup(GR);
+	else if (lm->clr)
+		r = ft_strdup(YL);
+	else
+		r = ft_strdup("");
+	ft_printf("%s[%s", r, s);
+	if (i && tm->plc != 1 && tm->plc != 3)
+		ft_printf("%s L-%d%s", (lm->clr ? RD : ""), i, WT);
+	else if (i)
+		ft_printf("%s C:%d%s", (lm->clr ? RD : ""), i, WT);
+	ft_printf("%s]%s", r, WT);
+	free(r);
+}
+
 static	void	emptylem(t_lm *lm, int min, int y)
 {
 	int			j;
@@ -48,10 +69,7 @@ static	void	printlem(t_lm *tm, t_lm *lm, int min, int y)
 		s[j] = 0;
 	}
 	j = (i ? 8 - ft_nbrlen(i, 1) - ft_strlen(s) : 11 - ft_strlen(s));
-	if (i)
-		ft_printf("%s[%s L-%d]%s", (lm->clr ? RD : WT), s, i, WT);
-	else
-		ft_printf("%s[%s]%s", (lm->clr ? YL : WT), s, WT);
+	printcolor(lm, s, i, tm);
 	*s = (checklinks(lm, yx, 3) ? '-' : ' ');
 	while (--j)
 		write(1, s, 1);

@@ -51,7 +51,8 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 		ft_printf("There were ants: %s%d%s\n", (lm->clr ? RD : WT),
 			lm->ants, WT);
 	if (f && lm->st)
-		ft_printf("Only one step: %sstart-finish%s\n", (lm->clr ? GR : WT), WT);
+		ft_printf("Only one step: %sstart%s-%sfinish%s\n", (lm->clr ? BL : ""),
+			WT, (lm->clr ? GR : ""), WT);
 	if (!f && lm->st)
 		ft_printf("Total steps: %s%d%s\n", (lm->clr ? YL : WT), lm->st - 1, WT);
 	if (lm->sh)
@@ -59,7 +60,8 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 	while (lm->sh && bg->plc != 3)
 	{
 		f = 0;
-		ft_printf("[%s] >>> ", bg->nm);
+		ft_printf("%s%s[%s] %s>>> ", (lm->clr ? YL : WT), (lm->clr &&
+			bg->plc == 1 ? BL : ""), bg->nm, WT);
 		while (bg->link[f]->plc != 3 && (bg->link[f]->way[1] != 1 ||
 			(bg->link[f]->ex > bg->ex && bg->plc != 1)))
 			f++;
@@ -71,20 +73,22 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 
 void	le_flags(int i, char **b, t_lm *lm, int a)
 {
-	write(1, "\n", 1);
-	if (i < 2)
-		return ;
-	while (--i)
-	{
-		if (!ft_strcmp(b[i], "-visual"))
-			lm->vs = 1;
-		if (!ft_strcmp(b[i], "-steps"))
-			lm->st = 1;
-		if (!ft_strcmp(b[i], "-short"))
-			lm->sh = 1;
-		if (!ft_strcmp(b[i], "-ants"))
-			lm->ants = a;
-		if (!ft_strcmp(b[i], "-color"))
-			lm->clr = 1;
-	}
+    if (!lm)
+        exit(ft_printf("ERROR\n"));
+    write(1, "\n", 1);
+    if (i < 2)
+        return ;
+    while (--i)
+    {
+        if (!ft_strcmp(b[i], "-visual"))
+            lm->vs = 1;
+        if (!ft_strcmp(b[i], "-steps"))
+            lm->st = 1;
+        if (!ft_strcmp(b[i], "-short"))
+            lm->sh = 1;
+        if (!ft_strcmp(b[i], "-ants"))
+            lm->ants = a;
+        if (!ft_strcmp(b[i], "-color"))
+            lm->clr = 1;
+    }
 }

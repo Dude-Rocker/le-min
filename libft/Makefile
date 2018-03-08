@@ -33,7 +33,7 @@ FUNDIR	=	./srcs/
 
 GFLG	=	gcc -Wall -Werror -Wextra -c
 
-HD		=	$(addprefix -I, ./Includes/)
+HD		=	$(addprefix -I, ./includes/)
 
 OBJDIR	=	./obj/
 

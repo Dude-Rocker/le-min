@@ -12,13 +12,31 @@
 
 #include "le_min.h"
 
+static	int	colordetec(t_lm *lm, int i, int cn)
+{
+	if (lm->plc != 1 && cn == lm->ant[1] && (lm->link[i]->ant[1] = lm->ant[1]))
+	{
+		if (lm->link[i]->plc == 3)
+			ft_printf("%sL%d%s-%s%s%s", (lm->clr ? RD : ""),
+			lm->link[i]->ant[1], WT, (lm->clr ? GR : ""), lm->link[i]->nm, WT);
+		else
+			ft_printf("%sL%d%s-%s%s%s", (lm->clr ? RD : ""),
+			lm->link[i]->ant[1], WT, (lm->clr ? YL : ""), lm->link[i]->nm, WT);
+		lm->ant[1] = 0;
+		return (1);
+	}
+	return (0);
+}
+
 static	int		ft_printres(t_lm *lm, int j, int i, int cn)
 {
-	while (!(i = 0) && lm->plc != 1 && cn != lm->ant[1])
+	while (!(i = 0) && lm->plc != 1 && (cn != lm->ant[1] || lm->plc == 3))
 	{
 		while (lm->link[i]->plc != 1 && (lm->link[i]->way[1] != j ||
 			lm->ex > lm->link[i]->ex))
 			i++;
+		if (lm->clr)
+			lm->link[i]->clr = 1;
 		lm = lm->link[i];
 	}
 	while (lm->link[i]->plc != 3 && (lm->link[i]->way[1] != j ||
@@ -26,19 +44,13 @@ static	int		ft_printres(t_lm *lm, int j, int i, int cn)
 		i++;
 	if (lm->plc == 1 && lm->link[i]->ant[0] == cn)
 	{
-		ft_printf("L%d-%s", lm->link[i]->ant[0], lm->link[i]->nm);
+		ft_printf("%sL%d%s-%s%s%s", (lm->clr ? RD : ""), lm->link[i]->ant[0],
+			WT, (lm->clr ? YL : ""), lm->link[i]->nm, WT);
 		lm->link[i]->ant[1] = lm->link[i]->ant[0];
 		lm->link[i]->ant[0] = 0;
 		return (1);
 	}
-	if (lm->plc != 1 && cn == lm->ant[1] && (lm->link[i]->ant[1] = lm->ant[1]))
-	{
-		ft_printf("%sL%d-%s%s", (lm->clr && lm->link[i]->plc == 3 ? GR : WT),
-			lm->ant[1], lm->link[i]->nm, WT);
-		lm->ant[1] = 0;
-		return (1);
-	}
-	return (0);
+	return (colordetec(lm, i, cn));
 }
 
 static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
@@ -53,9 +65,12 @@ static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
 	{
 		while (end->link[i] && end->link[i]->way[1] != j)
 			i++;
-		if (!end->link[i] || ((lm->clr) && !(end->link[i]->clr = 1)))
-			j = 0;
-		else if (ft_printres(end->link[i], j, 0, cn) && (cn += 1) && cn <= ant)
+		if (end->link[i] && lm->clr)
+			end->link[i]->clr = 1;
+		if ((!end->link[i] && !(j = 0)))
+			cn += 1;
+		else if (ft_printres(end->link[i], j, 0, cn) && !(j = 0) &&
+			(cn += 1) && cn <= ant)
 			ft_printf(" ");
 		i = 0;
 		j++;
@@ -89,9 +104,9 @@ void			ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j)
 				bg->link[i]->ant[0] = ++ant;
 		}
 		if ((j[0] += 1) == 1 && (bg->ant[1] = j[2]))
-			ft_resout(end, lm, end->ant[1] + 1, ant);
+			ft_resout(end, lm, 1, ant);
 		while (!j[2] && end->ant[1] < ant && !(bg->ant[1] = j[2]))
-			ft_resout(end, lm, end->ant[1] + 1, ant);
+			ft_resout(end, lm, 1, ant);
 	}
 }
 
@@ -104,4 +119,3 @@ void			minull(t_lm *bg, int i)
 		i++;
 	}
 }
-

@@ -6,7 +6,7 @@
 #    By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 21:48:14 by vgladush          #+#    #+#              #
-#    Updated: 2018/03/05 23:07:20 by vgladush         ###   ########.fr        #
+#    Updated: 2018/03/07 22:42:16 by vgladush         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= lem-in
 GC_FLGS = gcc -Wall -Wextra -Werror
 
 SRC_DIR = ./
-INC_DIR = ./Includes/ $(LB_PATH)/Includes/
+INC_DIR = ./includes/ $(LB_PATH)/Includes/
 OBJ_DIR = ./obj/
 LB_PATH = ./libft/
 LB_LINK	= -L ./libft -lft
@@ -25,7 +25,7 @@ INC		= $(addprefix -I, $(INC_DIR))
 
 OBJS	= $(SRCS:.c=.o)
 
-SRCS	= le_min.c ft_error.c ft_logic.c ft_resout.c ft_algoexit.c le_visual.c \
+SRCS	= lem_in.c ft_error.c ft_logic.c ft_resout.c ft_algoexit.c le_visual.c \
 		checklinks.c drawlinks.c
 
 all: $(NAME)
