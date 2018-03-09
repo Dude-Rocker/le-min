@@ -41,12 +41,30 @@ OBJS	=	$(FUN:.c=.o)
 
 OBJ		=	$(addprefix $(OBJDIR), $(OBJS))
 
+BLK = '\x1B[0;30m'
+RED = '\x1B[0;31m'
+GRN = '\x1B[0;32m'
+BRW = '\x1B[0;33m'
+BLE = '\x1B[0;34m'
+PUR = '\x1B[0;35m'
+CYN = '\x1B[0;36m'
+LGY = '\x1B[0;37m'
+DGY = '\x1B[1;30m'
+LRD = '\x1B[1;31m'
+LGR = '\x1B[1;32m'
+YEL = '\x1B[1;33m'
+LBL = '\x1B[1;34m'
+FIL = '\x1B[1;35m'
+LCN = '\x1B[1;36m'
+WHT = '\x1B[1;37m'
+WCR = '\x1B[0m'
+
 all: $(NAME)
 
 $(NAME): ./Includes/libft.h $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo $(NAME) "ready"
+	@echo $(GRN)$(NAME) "ready"
 
 $(OBJDIR)%.o: $(FUNDIR)%.c
 	@mkdir -p $(OBJDIR)
@@ -54,11 +72,11 @@ $(OBJDIR)%.o: $(FUNDIR)%.c
 
 clean:
 	@rm -rf $(OBJDIR)
-	@echo "Objects deleted"
+	@echo $(LRD)"objects" $(NAME) "deleted"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo $(NAME) "deleted"
+	@echo $(RED)$(NAME) "deleted"
 
 re: fclean all
 
