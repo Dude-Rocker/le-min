@@ -12,7 +12,7 @@
 
 #include "le_min.h"
 
-static	int	colordetec(t_lm *lm, int i, int cn)
+static	int		colordetec(t_lm *lm, int i, int cn)
 {
 	if (lm->plc != 1 && cn == lm->ant[1] && (lm->link[i]->ant[1] = lm->ant[1]))
 	{

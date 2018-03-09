@@ -12,9 +12,9 @@
 
 #include "le_min.h"
 
-static  void    printcolor(t_lm *lm, char *s, int i,t_lm *tm)
+static	void	printcolor(t_lm *lm, char *s, int i, t_lm *tm)
 {
-	char        *r;
+	char		*r;
 
 	if (lm->clr && tm->plc == 1)
 		r = ft_strdup(BL);

@@ -73,22 +73,22 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 
 void	le_flags(int i, char **b, t_lm *lm, int a)
 {
-    if (!lm)
-        exit(ft_printf("ERROR\n"));
-    write(1, "\n", 1);
-    if (i < 2)
-        return ;
-    while (--i)
-    {
-        if (!ft_strcmp(b[i], "-visual"))
-            lm->vs = 1;
-        if (!ft_strcmp(b[i], "-steps"))
-            lm->st = 1;
-        if (!ft_strcmp(b[i], "-short"))
-            lm->sh = 1;
-        if (!ft_strcmp(b[i], "-ants"))
-            lm->ants = a;
-        if (!ft_strcmp(b[i], "-color"))
-            lm->clr = 1;
-    }
+	if (!lm)
+		exit(ft_printf("ERROR\n"));
+	write(1, "\n", 1);
+	if (i < 2)
+		return ;
+	while (--i)
+	{
+		if (!ft_strcmp(b[i], "-visual"))
+			lm->vs = 1;
+		if (!ft_strcmp(b[i], "-steps"))
+			lm->st = 1;
+		if (!ft_strcmp(b[i], "-short"))
+			lm->sh = 1;
+		if (!ft_strcmp(b[i], "-ants"))
+			lm->ants = a;
+		if (!ft_strcmp(b[i], "-color"))
+			lm->clr = 1;
+	}
 }

@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2017.3.4\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\lem_in.dir/objects.a
-C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\ar.exe cr CMakeFiles\lem_in.dir/objects.a @CMakeFiles\lem_in.dir\objects1.rsp
-C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\gcc.exe  -std=c99 -g   -Wl,--whole-archive CMakeFiles\lem_in.dir/objects.a -Wl,--no-whole-archive  -o lem_in.exe -Wl,--out-implib,liblem_in.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\lem_in.dir\linklibs.rsp
