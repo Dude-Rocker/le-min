@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 15:21:05 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/08 13:20:29 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/12 16:50:34 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,7 @@ int				main(int ac, char **av)
 	lm = 0;
 	if (get_next_line(0, &ln) < 0)
 		exit(ft_printf("ERROR\n"));
-	ants = ft_atoi(ln);
-	outerror(ln, ants, 0);
+	ants = outerror(ln, 0, 0);
 	while (!(ln = 0) && get_next_line(0, &ln) > 0)
 	{
 		if (!*ln || !checkval(&ln, 0, &i) || (!i && !writelink(lm, ln, 0)))
