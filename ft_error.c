@@ -5,27 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/09 22:44:37 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/09 22:44:37 by vgladush         ###   ########.fr       */
+/*   Created: 2018/02/18 20:47:13 by vgladush          #+#    #+#             */
+/*   Updated: 2018/03/19 01:15:37 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "le_min.h"
+#include "lem_in.h"
 
-void	outerror(char *s, int j, int i)
+int			outerror(char *s, int j, int i)
 {
-	ft_printf("%s\n", s);
-	while (s[i] && s[i] > 47 && s[i] < 58)
-		i++;
-	if (s[i] || j < 1)
+	char	*ln;
+
+	ln = s;
+	while (*ln == '#')
 	{
-		free(s);
+		ft_printf("%s\n", ln);
+		if (!ft_strcmp("##start", ln) || !ft_strcmp("##end", ln))
+		{
+			free(ln);
+			exit(ft_printf("ERROR\n"));
+		}
+		free(ln);
+		get_next_line(0, &ln);
+	}
+	ft_printf("%s\n", ln);
+	j = ft_atoi(ln);
+	while (ln[i] && ln[i] > 47 && ln[i] < 58)
+		i++;
+	if (ln[i] || j < 1)
+	{
+		free(ln);
 		exit(ft_printf("ERROR\n"));
 	}
-	free(s);
+	free(ln);
+	return (j);
 }
 
-void	ft_allfree(t_lm *lm, char *d, char *s, int o)
+void		ft_allfree(t_lm *lm, char *d, char *s, int o)
 {
 	if (lm->next)
 		ft_allfree(lm->next, 0, 0, 0);
@@ -43,7 +59,7 @@ void	ft_allfree(t_lm *lm, char *d, char *s, int o)
 		exit(ft_printf("ERROR\n"));
 }
 
-void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
+void		le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 {
 	if (f && lm->vs)
 		le_visual(lm, lm, xy, 0);
@@ -71,24 +87,24 @@ void	le_debug(t_lm *lm, int f, int *xy, t_lm *bg)
 		ft_printf("%s[%s]%s\n", (lm->clr ? GR : WT), bg->nm, WT);
 }
 
-void	le_flags(int i, char **b, t_lm *lm, int a)
+void		le_flags(int i, char **b, t_lm *lm, int a)
 {
-    if (!lm)
-        exit(ft_printf("ERROR\n"));
-    write(1, "\n", 1);
-    if (i < 2)
-        return ;
-    while (--i)
-    {
-        if (!ft_strcmp(b[i], "-visual"))
-            lm->vs = 1;
-        if (!ft_strcmp(b[i], "-steps"))
-            lm->st = 1;
-        if (!ft_strcmp(b[i], "-short"))
-            lm->sh = 1;
-        if (!ft_strcmp(b[i], "-ants"))
-            lm->ants = a;
-        if (!ft_strcmp(b[i], "-color"))
-            lm->clr = 1;
-    }
+	if (!lm)
+		exit(ft_printf("ERROR\n"));
+	write(1, "\n", 1);
+	if (i < 2)
+		return ;
+	while (--i)
+	{
+		if (!ft_strcmp(b[i], "-visual"))
+			lm->vs = 1;
+		if (!ft_strcmp(b[i], "-steps"))
+			lm->st = 1;
+		if (!ft_strcmp(b[i], "-short"))
+			lm->sh = 1;
+		if (!ft_strcmp(b[i], "-ants"))
+			lm->ants = a;
+		if (!ft_strcmp(b[i], "-color"))
+			lm->clr = 1;
+	}
 }

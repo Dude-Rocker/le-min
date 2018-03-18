@@ -6,11 +6,11 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:32:41 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/05 23:03:02 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/19 01:17:50 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "le_min.h"
+#include "lem_in.h"
 
 static  void    printcolor(t_lm *lm, char *s, int i,t_lm *tm)
 {

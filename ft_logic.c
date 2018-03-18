@@ -6,11 +6,11 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 23:28:17 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/15 13:02:18 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/19 01:18:28 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "le_min.h"
+#include "lem_in.h"
 
 static	void	startend(t_lm *cl, t_lm *bg, t_lm *end, int j)
 {

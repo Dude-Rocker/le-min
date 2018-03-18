@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   le_min.h                                           :+:      :+:    :+:   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 14:37:27 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/15 14:25:47 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/19 01:20:26 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LE_MIN_H
-# define LE_MIN_H
+#ifndef LEM_IN_H
+# define LEM_IN_H
 
 # include "libft.h"
 # define RD "\x1B[35m"
@@ -38,7 +38,7 @@ typedef	struct		s_lm
 	struct s_lm		**link;
 }					t_lm;
 
-void				outerror(char *s, int j, int i);
+int					outerror(char *s, int j, int i);
 void				ft_allfree(t_lm *lm, char *d, char *s, int o);
 int					writelink(t_lm *lm, char *s, int i);
 void				ft_logic(int i, t_lm *lm);

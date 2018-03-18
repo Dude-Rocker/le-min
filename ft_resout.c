@@ -6,13 +6,13 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 14:52:56 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/05 23:26:06 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/19 01:17:12 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "le_min.h"
+#include "lem_in.h"
 
-static	int	colordetec(t_lm *lm, int i, int cn)
+static	int		colordetec(t_lm *lm, int i, int cn)
 {
 	if (lm->plc != 1 && cn == lm->ant[1] && (lm->link[i]->ant[1] = lm->ant[1]))
 	{

@@ -6,11 +6,11 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 19:30:08 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/06 00:01:24 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/19 01:10:39 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "le_min.h"
+#include "lem_in.h"
 
 static	int		le_x_close(t_lm *lm, t_lm *tm, int *yx, int j)
 {
