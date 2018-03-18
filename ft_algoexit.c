@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 17:33:23 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/12 16:41:56 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/13 02:50:00 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,16 @@ void			ft_algoexit(t_lm *end, int a, t_lm *bg, t_lm *lm)
 		if (bg->link[i]->ex)
 			o++;
 	i = 1;
+	ft_printf("aaaaa\n");
 	while (o--)
 		srcexit(bg, i++, 1, -1);
+	ft_printf("sss\n");
 	minull(bg, 0);
+	ft_printf("arrrr\n");
 	rightway(bg, 0, 0, 0);
+	ft_printf("awww\n");
 	trueway(bg, 0, 0, 1);
+	ft_printf("avvva\n");
 	ft_theway(end, lm, bg, j);
+	ft_printf("pppp\n");
 }

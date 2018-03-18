@@ -6,15 +6,15 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 00:32:41 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/09 16:26:51 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/05 23:03:02 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "le_min.h"
 
-static	void	printcolor(t_lm *lm, char *s, int i, t_lm *tm)
+static  void    printcolor(t_lm *lm, char *s, int i,t_lm *tm)
 {
-	char		*r;
+	char        *r;
 
 	if (lm->clr && tm->plc == 1)
 		r = ft_strdup(BL);

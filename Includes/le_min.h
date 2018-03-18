@@ -6,7 +6,7 @@
 /*   By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 14:37:27 by vgladush          #+#    #+#             */
-/*   Updated: 2018/03/12 16:50:42 by vgladush         ###   ########.fr       */
+/*   Updated: 2018/03/15 14:25:47 by vgladush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef	struct		s_lm
 	struct s_lm		**link;
 }					t_lm;
 
-int					outerror(char *s, int j, int i);
+void				outerror(char *s, int j, int i);
 void				ft_allfree(t_lm *lm, char *d, char *s, int o);
 int					writelink(t_lm *lm, char *s, int i);
 void				ft_logic(int i, t_lm *lm);
