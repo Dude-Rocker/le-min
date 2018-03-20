@@ -61,7 +61,8 @@ static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
 
 	i = 0;
 	j = 1;
-	while (cn <= ant)
+	minull(lm, 0, 1);
+	while (cn <= ant && !(i = 0))
 	{
 		while (end->link[i] && end->link[i]->way[1] != j)
 			i++;
@@ -72,10 +73,9 @@ static	void	ft_resout(t_lm *end, t_lm *lm, int cn, int ant)
 		else if (ft_printres(end->link[i], j, 0, cn) && !(j = 0) &&
 			(cn += 1) && cn <= ant)
 			ft_printf(" ");
-		i = 0;
 		j++;
 	}
-	ft_printf("\n");
+	write(1, "\n", 1);
 	if (lm->st)
 		lm->st += 1;
 	if (lm->vs)
@@ -110,8 +110,17 @@ void			ft_theway(t_lm *end, t_lm *lm, t_lm *bg, int *j)
 	}
 }
 
-void			minull(t_lm *bg, int i)
+void			minull(t_lm *bg, int i, int j)
 {
+	if (j)
+	{
+		if (bg->vs && bg->sbs)
+		{
+			read(1, 0, 1);
+			ft_printf("\033[1J\033[;H");
+		}
+		return ;
+	}
 	while (bg->link[i])
 	{
 		if (bg->link[i]->way[1] < 0)

@@ -106,5 +106,7 @@ void		le_flags(int i, char **b, t_lm *lm, int a)
 			lm->ants = a;
 		if (!ft_strcmp(b[i], "-color"))
 			lm->clr = 1;
+		if (!ft_strcmp(b[i], "-sbs"))
+			lm->sbs = 1;
 	}
 }

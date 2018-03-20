@@ -12,8 +12,6 @@
 
 #include "lem_in.h"
 
-static	void	srcexit(t_lm *lm, int a, int j, int i);
-
 static	int		changeway(t_lm *lm, int *a, int j, int i)
 {
 	while (lm->link[++i])
@@ -21,8 +19,9 @@ static	int		changeway(t_lm *lm, int *a, int j, int i)
 			break ;
 	if (lm->link[i])
 		*a = i;
-	else if (!(j = 0))
+	else
 	{
+		j = 0;
 		i = 0;
 		while (lm->link[i] && lm->link[i]->way[1] != lm->way[1])
 			i++;
@@ -39,7 +38,7 @@ static	int		changeway(t_lm *lm, int *a, int j, int i)
 	return (0);
 }
 
-static	void	srcexit(t_lm *lm, int a, int j, int i)
+void			srcexit(t_lm *lm, int a, int j, int i)
 {
 	int			p;
 	int			m;
@@ -72,9 +71,9 @@ static	void	rightway(t_lm *lm, int i, int j, int o)
 	if (i)
 	{
 		lm->way[1] = i;
-		while (lm->link[o]->way[1] != j && lm->link[o]->plc != 3)
+		while (lm->link[o] && lm->link[o]->way[1] != j && lm->link[o]->plc != 3)
 			o++;
-		if (lm->link[o]->plc != 3)
+		if (lm->link[o] && lm->link[o]->plc != 3)
 			rightway(lm->link[o], i, j, 0);
 		return ;
 	}
@@ -136,7 +135,7 @@ void			ft_algoexit(t_lm *end, int a, t_lm *bg, t_lm *lm)
 	i = 1;
 	while (o--)
 		srcexit(bg, i++, 1, -1);
-	minull(bg, 0);
+	minull(bg, 0, 0);
 	rightway(bg, 0, 0, 0);
 	trueway(bg, 0, 0, 1);
 	ft_theway(end, lm, bg, j);

@@ -6,7 +6,7 @@
 #    By: vgladush <vgladush@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 21:48:14 by vgladush          #+#    #+#              #
-#    Updated: 2018/03/19 01:20:54 by vgladush         ###   ########.fr        #
+#    Updated: 2018/03/09 16:26:51 by vgladush         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= lem-in
 
 GC_FLGS = gcc -Wall -Wextra -Werror
 
-SRC_DIR = ./
+SRC_DIR = ./srcs/
 INC_DIR = ./includes/ $(LB_PATH)/includes/
 OBJ_DIR = ./obj/
 LB_PATH = ./libft/

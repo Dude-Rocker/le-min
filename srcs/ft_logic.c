@@ -48,6 +48,7 @@ void			ft_creat(t_lm *lm, int i, int j, int k)
 		lm->vs = 0;
 		lm->st = 0;
 		lm->sh = 0;
+		lm->sbs = 0;
 		lm->ants = 0;
 		lm->next = 0;
 		lm->link = 0;
