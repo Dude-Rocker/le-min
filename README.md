@@ -1,4 +1,4 @@
-# lem-in
+# [lem-in](https://github.com/Dude-Rocker/resources/blob/master/lem-in/lem-in.pdf)
 ## The school 42 project of algorithms branch
 
 ## Game rules
