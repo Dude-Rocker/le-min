@@ -27,4 +27,4 @@
 ### without flags
 ![](https://github.com/Dude-Rocker/lem-in/blob/master/examples/wo_flags.png)
 ### visual mode all flags are on
-![](https://github.com/Dude-Rocker/lem-in/blob/master/examples/wo_flags.png)
+![](https://github.com/Dude-Rocker/lem-in/blob/master/examples/visual.gif)
